@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../auth/demo_admin.dart';
 import '../widgets/theme_mode_button.dart';
 import 'home_screen.dart';
 
@@ -27,13 +28,26 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (!DemoAdmin.validate(email, password)) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Credenciales incorrectas. Usa la cuenta administrador.',
+          ),
+        ),
+      );
+      return;
+    }
+
     setState(() => _loading = true);
-    // Simula llamada a API; sustituir por autenticación real.
-    await Future<void>.delayed(const Duration(milliseconds: 600));
+    await Future<void>.delayed(const Duration(milliseconds: 400));
     if (!mounted) return;
     setState(() => _loading = false);
 
-    final email = _emailController.text.trim();
     await Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (context) => HomeScreen(email: email),
@@ -62,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ThemeModeButton(),
                     ),
                     Icon(
-                      Icons.lock_outline_rounded,
+                      Icons.engineering_outlined,
                       size: 56,
                       color: scheme.primary,
                     ),
@@ -76,9 +90,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Inicia sesión para continuar',
+                      'Encuentra maestros de construcción cerca y accede a servicios según el perfil.',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Inicia sesión para continuar',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: scheme.onSurfaceVariant,
                           ),
                     ),
@@ -155,6 +177,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Text('Iniciar sesión'),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Administrador: ${DemoAdmin.email}\nContraseña: ${DemoAdmin.password}',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
                     ),
                   ],
                 ),

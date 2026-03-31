@@ -34,7 +34,7 @@ class NoviApp extends StatelessWidget {
       valueListenable: noviThemeMode,
       builder: (context, mode, _) {
         return MaterialApp(
-          title: 'Novi',
+          title: 'Novi — Maestros cerca',
           debugShowCheckedModeBanner: false,
           themeMode: mode,
           theme: _theme(Brightness.light),
