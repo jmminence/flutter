@@ -1,5 +1,7 @@
 # Novi
 
+Repositorio: **[github.com/jmminence/novi](https://github.com/jmminence/novi)**
+
 **Novi** es una aplicación móvil (APK Android) desarrollada con Flutter. Incluye pantalla de inicio de sesión, pantalla de inicio tras “entrar”, y **modo claro / oscuro** que puedes dejar automático según el teléfono o fijar a mano; la preferencia se guarda en el dispositivo.
 
 > Proyecto personal en evolución: más adelante se puede conectar a un backend real (cuentas, API, etc.).
@@ -32,7 +34,7 @@ Para **actualizar** la app instalada, vuelve a instalar una APK nueva con el mis
 Requisitos: [Flutter](https://docs.flutter.dev/get-started/install) (Dart ^3.11) y, para Android, el SDK configurado (`flutter doctor`).
 
 ```bash
-git clone https://github.com/TU_USUARIO/novi.git
+git clone https://github.com/jmminence/novi.git
 cd novi
 flutter pub get
 flutter run -d chrome    # o el dispositivo que uses
